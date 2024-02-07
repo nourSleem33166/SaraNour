@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .h-screen {
+      height: 100vh;
+    }
+
+    .-mt-16 {
+      margin-top: -16px;
+    }
+
+    .text-4xl {
+      font-size: 2rem;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .my-4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .h-[200px] {
+      height: 200px;
+    }
+
+    .bg-green-500 {
+      background-color: #34d399;
+    }
+
+    .hover-bg-green-700:hover {
+      background-color: #22c35e;
+    }
+
+    .text-white {
+      color: #ffffff;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .rounded {
+      border-radius: 0.25rem;
+    }
+
+    .bg-red-500 {
+      background-color: #ef4444;
+    }
+
+    .hover-bg-red-700:hover {
+      background-color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col items-center justify-center h-screen -mt-16">
+    <img id="image" class="h-[200px]" src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" />
+    <h1 id="question" class="text-4xl my-4">Sara Badlah, Will you be my Valentine?</h1>
+    <div id="buttonsContainer">
+      <button id="yesButton" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded" style="font-size: 16px;">Yes</button>
+      <button id="noButton" class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded">No</button>
+    </div>
+  </div>
+
+  <script>
+    const image = document.getElementById('image');
+    const question = document.getElementById('question');
+    const buttonsContainer = document.getElementById('buttonsContainer');
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+
+    let noCount = 0;
+    let yesPressed = false;
+
+    const handleNoClick = () => {
+      noCount++;
+      updateContent();
+    };
+
+    const getNoButtonText = () => {
+      const phrases = [
+        "No",
+        "Are you sure?",
+        "Really sure?",
+        "Think again!",
+        "Last chance!",
+        "Surely not?",
+        "You might regret this!",
+        "Give it another thought!",
+        "Are you absolutely certain?",
+        "This could be a mistake!",
+        "Have a heart!",
+        "Don't be so cold!",
+        "Change of heart?",
+        "Wouldn't you reconsider?",
+        "Is that your final answer?",
+        "You're breaking my heart ;(",
+      ];
+
+      return phrases[Math.min(noCount, phrases.length - 1)];
+    };
+
+    const updateContent = () => {
+      if (yesPressed) {
+        image.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+        question.innerText = "Ok yay!!!";
+        buttonsContainer.style.display = 'none'; // Hide buttons
+      } else {
+        image.src = "https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif";
+        question.innerText = "Sara Badlah, Will you be my Valentine?";
+      }
+
+      yesButton.style.fontSize = noCount * 20 + 16 + 'px';
+      noButton.innerText = noCount === 0 ? "No" : getNoButtonText();
+    };
+
+    yesButton.addEventListener('click', () => {
+      yesPressed = true;
+      updateContent();
+    });
+
+    noButton.addEventListener('click', handleNoClick);
+
+    // Initial content update
+    updateContent();
+  </script>
+</body>
+</html>
